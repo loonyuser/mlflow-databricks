@@ -13,17 +13,14 @@ from sklearn.model_selection import train_test_split
 import mlflow
 import mlflow.sklearn
 
-
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
     
-    loan_approval_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cust_data_processed.csv")
-    data = pd.read_csv( loan_approval_path )
-    X = cust_data.drop(labels=['loan_approval_status'], axis=1)
+    loan_approval_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cust_data_processed.csv')
+    cust_data = pd.read_csv( loan_approval_path )
+    X = cust_data.drop(labels = ['loan_approval_status'], axis = 1)
 
     y = cust_data['loan_approval_status']
     
@@ -48,15 +45,15 @@ if __name__ == "__main__":
         test_recall_score = recall_score(y_test, predictions)
         test_f1_score = f1_score(y_test, predictions)
         auc_score = roc_auc_score(y_test, predictions_proba[:,1])
-        metrics = {"Test_accuracy": test_accuracy, "Test_precision_score": test_precision_score,
-                   "Test_recall_score": test_recall_score,"Test_f1_score": test_f1_score, "auc score": auc_score}
+        metrics = {'Test_accuracy': test_accuracy, 'Test_precision_score': test_precision_score,
+                   'Test_recall_score': test_recall_score,'Test_f1_score': test_f1_score, 'AUC_score': auc_score}
     
           
-        mlflow.log_metrics(metrics )
+        mlflow.log_metrics(metrics)
     
-        mlflow.set_tag("Classifier", "RF-tuned parameters")
+        mlflow.set_tag('Classifier', 'RF-tuned parameters')
        
-        mlflow.sklearn.log_model(model, "RF-tuned parameters")
+        mlflow.sklearn.log_model(model, 'RF-tuned parameters')
         
         
 
