@@ -23,11 +23,8 @@ if __name__ == '__main__':
     X = cust_data.drop(labels = ['loan_approval_status'], axis = 1)
 
     y = cust_data['loan_approval_status']
-    
+    # Split the data into training and test sets. (0.7, 0.3) split.  
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, stratify = y, random_state = 123)
-    
-    # Split the data into training and test sets. (0.7, 0.3) split.    
-    train, test = train_test_split(data)
       
     n_estimators = int(sys.argv[1]) if len(sys.argv) > 1 else 100
     min_samples_split = int(sys.argv[2]) if len(sys.argv) > 2 else 2
